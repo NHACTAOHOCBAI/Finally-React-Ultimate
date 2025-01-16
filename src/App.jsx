@@ -3,6 +3,8 @@ import TodoData from './components/todo/TodoData'
 import TodoNew from './components/todo/TodoNew'
 import ReactLogo from './assets/react.svg'
 import { useState } from 'react'
+import Header from './components/layouts/header'
+import Footer from './components/layouts/footer'
 const App = () => {
   // khoi tao bien state todolist de chua noi dung
   const [todoList, setTodoList] = useState([])
@@ -26,23 +28,27 @@ const App = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
   return (
-    <div className="todo-container">
-      <div className="todo-title">Todo List</div>
-      <TodoNew
-        addNewTodo={addNewTodo}
-      // truyen ham new
-      />
-      {todoList.length !== 0 ?
-        <TodoData
-          todoList={todoList}
-          deleteTodo={deleteTodo}
+    <>
+      <Header />
+      <div className="todo-container">
+        <div className="todo-title">Todo List</div>
+        <TodoNew
+          addNewTodo={addNewTodo}
+        // truyen ham new
         />
-        :
-        <div>
-          <img src={ReactLogo} className='logo' />
-        </div>
-      }
-    </div>
+        {todoList.length !== 0 ?
+          <TodoData
+            todoList={todoList}
+            deleteTodo={deleteTodo}
+          />
+          :
+          <div>
+            <img src={ReactLogo} className='logo' />
+          </div>
+        }
+      </div>
+      <Footer />
+    </>
   )
 
 }
