@@ -1,10 +1,15 @@
 const TodoData = (props) => {
-    const { Name, Age, Obj, todoList } = props;
+    const { todoList } = props;
     return (
         <div className="todo-data">
-            <div> My name is {Name}</div>
-            <div> Watching Youtube</div>
-            <div>{JSON.stringify(todoList)}</div>
+            {todoList.map((value, index) => {
+                return (
+                    <div className="todo-item">
+                        <div>{value.name}</div>
+                        <button>delete</button>
+                    </div>
+                )
+            })}
         </div>
     )
 }
