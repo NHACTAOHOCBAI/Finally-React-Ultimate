@@ -5,6 +5,11 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import LoginPage from './pages/login.jsx';
+import RegisterPage from './pages/register.jsx';
+import UserPage from './pages/user.jsx';
+import ProductPage from './pages/Product.jsx';
+import './styles/global.css'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -12,19 +17,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>Login Page</div>
+    element: <LoginPage />
   },
   {
     path: "/register",
-    element: <div>register Page</div>
+    element: <RegisterPage />
   },
   {
     path: "/users",
-    element: <div>user Page</div>
+    element: <UserPage />
   },
   {
     path: "/products",
-    element: <div>products Page</div>
+    element: <ProductPage />
   },
 ]);
 createRoot(document.getElementById('root')).render(
