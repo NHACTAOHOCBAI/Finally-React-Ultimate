@@ -13,7 +13,17 @@ import './styles/global.css'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
+    children: [
+      {
+        path: "/users",
+        element: <UserPage />
+      },
+      {
+        path: "/products",
+        element: <ProductPage />
+      },
+    ]
   },
   {
     path: "/login",
@@ -22,14 +32,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />
-  },
-  {
-    path: "/users",
-    element: <UserPage />
-  },
-  {
-    path: "/products",
-    element: <ProductPage />
   },
 ]);
 createRoot(document.getElementById('root')).render(

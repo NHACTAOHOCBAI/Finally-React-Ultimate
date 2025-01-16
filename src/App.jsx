@@ -5,6 +5,7 @@ import ReactLogo from './assets/react.svg'
 import { useState } from 'react'
 import Header from './components/layouts/header'
 import Footer from './components/layouts/footer'
+import { Outlet } from 'react-router-dom'
 const App = () => {
   // khoi tao bien state todolist de chua noi dung
   const [todoList, setTodoList] = useState([])
@@ -47,6 +48,7 @@ const App = () => {
           </div>
         }
       </div>
+      <Outlet />
       <Footer />
     </>
   )
