@@ -1,11 +1,20 @@
 import { Button, Input } from 'antd';
 import { useState } from 'react';
+import axios from 'axios';
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const handleClickBtn = () => {
+        const URL_Backend = "https://jsonplaceholder.typicode.com/posts";
+        const data = {
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            password: password
+        }
+        axios.post(URL_Backend, data);
         console.log({ fullName, email, phone, password });
     }
     return (
