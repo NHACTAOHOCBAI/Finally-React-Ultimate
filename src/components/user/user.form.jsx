@@ -1,21 +1,20 @@
-import { Button, Input } from 'antd';
+import { Button, Input, notification } from 'antd';
 import { useState } from 'react';
-import axios from 'axios';
+import { createUserAPI } from '../../services/api.service';
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
-    const handleClickBtn = () => {
-        const URL_Backend = "https://jsonplaceholder.typicode.com/posts";
-        const data = {
-            fullName: fullName,
-            email: email,
-            phone: phone,
-            password: password
+    const handleClickBtn = async () => {
+        const res = await createUserAPI(fullName, email, phone, password)
+        console.log(res.data);
+        if (res.data) {
+            notification.success({
+                message: "create user",
+                description: "Tạo mới người dùng thành công"
+            })
         }
-        axios.post(URL_Backend, data);
-        console.log({ fullName, email, phone, password });
     }
     return (
         <div className='user-form' style={{ margin: "20px 0" }}>
