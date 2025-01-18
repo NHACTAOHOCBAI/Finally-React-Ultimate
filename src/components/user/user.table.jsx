@@ -8,6 +8,7 @@ const UserTable = () => {
     useEffect(() => {
         loadUser();
     }, [])
+    // chay 1 lan khi giao dien da load xong
     const columns = [
         {
             title: 'ID',
