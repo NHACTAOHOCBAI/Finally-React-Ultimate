@@ -1,24 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input, notification, Modal } from 'antd';
-import { createUserAPI } from "../../services/api.service";
-const UpdateUserModal = () => {
+import { updateUserAPI } from "../../services/api.service";
+const UpdateUserModal = (props) => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(true)
-    const handleClickBtn = () => {
-        setIsModalOpen(true)
-    }
+    const { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate, loadUser } = props
+    useEffect(() => {
+        if (dataUpdate) {
+            setFullName(dataUpdate.userId)
+            setEmail(dataUpdate.id)
+            setPhone(dataUpdate.title)
+            setPassword(dataUpdate.body)
+        }
+        console.log(dataUpdate);
+    }, [dataUpdate])
     const handleClickOK = async () => {
-        const res = await createUserAPI(fullName, email, phone, password)
+        const res = await updateUserAPI(fullName, email, phone, password)
         console.log(res.data);
         if (res.data) {
             notification.success({
                 message: "Update user",
-                description: "Tạo mới người dùng thành công"
+                description: "Update user successfully"
             })
-            // await loadUser();
+            await loadUser();
         }
         resetAndCloseModal();
     }
@@ -27,11 +33,12 @@ const UpdateUserModal = () => {
         setEmail("");
         setPhone("");
         setPassword("");
-        setIsModalOpen(false);
+        setIsModalUpdateOpen(false);
+        setDataUpdate(null);
     }
     return (
         <Modal title="Update User"
-            open={isModalOpen}
+            open={isModalUpdateOpen}
             onOk={() => handleClickOK()}
             onCancel={() => resetAndCloseModal()}
             maskClosable={false}
