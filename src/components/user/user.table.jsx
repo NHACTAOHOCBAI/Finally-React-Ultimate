@@ -1,6 +1,6 @@
 
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Table, Popconfirm } from 'antd';
+import { Table, Popconfirm, notification } from 'antd';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
 import ViewDetail from './view.user.detail';
@@ -62,10 +62,6 @@ const UserTable = (props) => {
                             cancelText="No"
                         >
                             <DeleteOutlined
-                                // onClick={() => {
-                                //     setDataDelete(record);
-                                //     setIsModalDeleteOpen(true);
-                                // }}
                                 style={{ color: "red" }} />
                         </Popconfirm>
                     </div>
@@ -92,12 +88,6 @@ const UserTable = (props) => {
                 isModalDetailOpen={isModalDetailOpen}
                 setIsModalDetailOpen={setIsModalDetailOpen}
             />
-            {/* <DeleteUserModal
-                dataDelete={dataDelete}
-                setDataDelete={setDataDelete}
-                isModalDeleteOpen={isModalDeleteOpen}
-                setIsModalDeleteOpen={setIsModalDeleteOpen}
-            /> */}
         </>
     )
 }
