@@ -14,6 +14,13 @@ const ViewDetail = (props) => {
                     <p>{`ID :${dataView.id}`}</p>
                     <p>{`Title :${dataView.title}`}</p>
                     <p>{`Body :${dataView.body}`}</p>
+                    <div>
+                        <img src={`${import.meta.env.VITE_BACKEND_URL}/images/${dataView.avatar}`} />
+                    </div>
+                    <div>
+                        <label htmlFor="btnUpload">Up Load file</label>
+                        <input type="file" hidden id='btnUpload' />
+                    </div>
                 </>
                 :
                 <>
