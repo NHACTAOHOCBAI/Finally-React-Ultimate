@@ -1,13 +1,13 @@
 import { Drawer } from "antd"
 
 const ViewDetail = (props) => {
-    const { setDataView, dataView, open, setOpen } = props
+    const { setDataView, dataView, isModalDetailOpen, setIsModalDetailOpen } = props
     return (
         <Drawer title="Basic Drawer"
-            open={open}
+            open={isModalDetailOpen}
             onClose={() => {
                 setDataView(null);
-                setOpen(false)
+                setIsModalDetailOpen(false)
             }}>
             {dataView ?
                 <>

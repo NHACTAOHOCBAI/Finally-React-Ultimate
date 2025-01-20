@@ -4,15 +4,16 @@ import { fetchAllUser } from '../services/api.service';
 import { useEffect, useState } from 'react';
 
 const UserPage = () => {
+    // lifting de reload data
     const [dataUser, setDataUser] = useState([])
     useEffect(() => {
         loadUser();
     }, [])
-    // chay 1 lan khi giao dien da load xong
     const loadUser = async () => {
         const res = await fetchAllUser();
         setDataUser(res.data)
     }
+    //
     return (
         <div style={{ padding: '20px' }}>
             <UserForm

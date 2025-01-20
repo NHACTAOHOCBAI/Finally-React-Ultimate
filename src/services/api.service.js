@@ -19,11 +19,16 @@ const updateUserAPI = (fullName, email, phone, password) => {
     }
     return axios.put(URL_Backend, data);
 }
+const deleteUserAPI = (id) => {
+    const URL_Backend = `/posts/1/${id}`;
+    return axios.put(URL_Backend);
+}
 const fetchAllUser = () => {
     const URL_Backend = "/posts";
     return axios.get(URL_Backend);
 }
 export {
+    deleteUserAPI,
     createUserAPI,
     updateUserAPI,
     fetchAllUser

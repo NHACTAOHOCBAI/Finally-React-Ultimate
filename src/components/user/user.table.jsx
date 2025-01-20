@@ -1,15 +1,26 @@
 
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Table } from 'antd';
+import { Table, Popconfirm } from 'antd';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
 import ViewDetail from './view.user.detail';
+import { deleteUserAPI } from '../../services/api.service';
 const UserTable = (props) => {
-    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
+    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataView, setDataView] = useState(null);
-    const [open, setOpen] = useState(false);
+    const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
     const { dataUser, loadUser } = props;
+    const handleClickDelete = async (id) => {
+        const res = await deleteUserAPI(id)
+        if (res.data) {
+            notification.success({
+                message: "Delete user",
+                description: "Delete user successfully"
+            })
+            await loadUser();
+        }
+    }
     const columns = [
         {
             title: 'ID',
@@ -17,7 +28,7 @@ const UserTable = (props) => {
                 return (
                     <div onClick={() => {
                         setDataView(record);
-                        setOpen(true);
+                        setIsModalDetailOpen(true);
                     }}>{record.id}</div>
                 )
             }
@@ -42,7 +53,21 @@ const UserTable = (props) => {
                                 setIsModalUpdateOpen(true)
                             }}
                             style={{ color: 'orange' }} />
-                        <DeleteOutlined style={{ color: "red" }} />
+                        <Popconfirm
+                            title="Delete the task"
+                            description="Are you sure to delete this user?"
+                            onConfirm={() => { handleClickDelete(record.id) }}
+                            onCancel={() => { }}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <DeleteOutlined
+                                // onClick={() => {
+                                //     setDataDelete(record);
+                                //     setIsModalDeleteOpen(true);
+                                // }}
+                                style={{ color: "red" }} />
+                        </Popconfirm>
                     </div>
                 )
             }
@@ -64,9 +89,15 @@ const UserTable = (props) => {
             <ViewDetail
                 dataView={dataView}
                 setDataView={setDataView}
-                open={open}
-                setOpen={setOpen}
+                isModalDetailOpen={isModalDetailOpen}
+                setIsModalDetailOpen={setIsModalDetailOpen}
             />
+            {/* <DeleteUserModal
+                dataDelete={dataDelete}
+                setDataDelete={setDataDelete}
+                isModalDeleteOpen={isModalDeleteOpen}
+                setIsModalDeleteOpen={setIsModalDeleteOpen}
+            /> */}
         </>
     )
 }

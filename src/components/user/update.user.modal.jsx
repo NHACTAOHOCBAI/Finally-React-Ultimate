@@ -14,11 +14,9 @@ const UpdateUserModal = (props) => {
             setPhone(dataUpdate.title)
             setPassword(dataUpdate.body)
         }
-        console.log(dataUpdate);
     }, [dataUpdate])
     const handleClickOK = async () => {
         const res = await updateUserAPI(fullName, email, phone, password)
-        console.log(res.data);
         if (res.data) {
             notification.success({
                 message: "Update user",

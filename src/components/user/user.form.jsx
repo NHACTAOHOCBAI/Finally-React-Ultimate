@@ -11,6 +11,7 @@ const UserForm = (props) => {
     const handleClickBtn = () => {
         setIsModalOpen(true)
     }
+    //new user
     const handleClickOK = async () => {
         const res = await createUserAPI(fullName, email, phone, password)
         console.log(res.data);
@@ -23,6 +24,8 @@ const UserForm = (props) => {
         }
         resetAndCloseModal();
     }
+    //
+    // set empty
     const resetAndCloseModal = () => {
         setFullName("");
         setEmail("");
@@ -30,6 +33,7 @@ const UserForm = (props) => {
         setPassword("");
         setIsModalOpen(false);
     }
+    //
     return (
         <div className='user-form' style={{ margin: "20px 0" }}>
             <div style={{ display: 'flex', justifyContent: "space-between" }}>
