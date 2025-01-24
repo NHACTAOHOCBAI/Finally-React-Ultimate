@@ -11,8 +11,9 @@ const UserTable = (props) => {
     const [dataView, setDataView] = useState(null);
     const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
     const { dataUser, loadUser } = props;
-    const handleClickDelete = async (id) => {
-        const res = await deleteUserAPI(id)
+    const handleClickDelete = async (_id) => {
+        const res = await deleteUserAPI(_id)
+        console.log(res);
         if (res.data) {
             notification.success({
                 message: "Delete user",
@@ -33,21 +34,22 @@ const UserTable = (props) => {
         {
             title: 'ID',
             render: (_, record) => {
+
                 return (
                     <div onClick={() => {
                         setDataView(record);
                         setIsModalDetailOpen(true);
-                    }}>{record.id}</div>
+                    }}>{record._id}</div>
                 )
             }
         },
         {
-            title: 'Title',
-            dataIndex: 'title',
+            title: 'Full Name',
+            dataIndex: 'fullName',
         },
         {
-            title: 'Body',
-            dataIndex: 'body',
+            title: 'Email',
+            dataIndex: 'email',
         },
         {
             title: 'Action',
@@ -64,7 +66,7 @@ const UserTable = (props) => {
                         <Popconfirm
                             title="Delete the task"
                             description="Are you sure to delete this user?"
-                            onConfirm={() => { handleClickDelete(record.id) }}
+                            onConfirm={() => { handleClickDelete(record._id) }}
                             onCancel={() => { }}
                             okText="Yes"
                             cancelText="No"
@@ -91,6 +93,7 @@ const UserTable = (props) => {
                 setIsModalUpdateOpen={setIsModalUpdateOpen}
             />
             <ViewDetail
+                loadUser={loadUser}
                 dataView={dataView}
                 setDataView={setDataView}
                 isModalDetailOpen={isModalDetailOpen}
