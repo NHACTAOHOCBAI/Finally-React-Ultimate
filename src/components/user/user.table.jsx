@@ -10,7 +10,7 @@ const UserTable = (props) => {
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataView, setDataView] = useState(null);
     const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
-    const { dataUser, loadUser } = props;
+    const { dataUser, loadUser, current, pageSize, total, setCurrent, setPageSize } = props;
     const handleClickDelete = async (_id) => {
         const res = await deleteUserAPI(_id)
         console.log(res);
@@ -22,12 +22,24 @@ const UserTable = (props) => {
             await loadUser();
         }
     }
+    const onChange = (pagination, filters, sorter, extra) => {
+        if (pagination && pagination.current) {
+            if (+pagination.current !== +current) {
+                setCurrent(+pagination.current)
+            }
+        }
+        if (pagination && pagination.pageSize) {
+            if (+pagination.pageSize !== +pageSize) {
+                setPageSize(+pagination.pageSize)
+            }
+        }
+    }
     const columns = [
         {
             title: "STT",
             render: (_, record, index) => {
                 return (
-                    <>{index + 1}</>
+                    <>{index + 1 + pageSize * (current - 1)}</>
                 )
             }
         },
@@ -84,6 +96,20 @@ const UserTable = (props) => {
             <Table
                 columns={columns}
                 dataSource={dataUser}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => {
+                            return (
+                                <div> {range[0]}-{range[1]} trên {total} rows</div>
+                            )
+                        }
+                    }
+                }
+                onChange={onChange}
             />
             <UpdateUserModal
                 loadUser={loadUser}

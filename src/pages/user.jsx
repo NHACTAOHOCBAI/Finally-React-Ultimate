@@ -6,12 +6,20 @@ import { useEffect, useState } from 'react';
 const UserPage = () => {
     // lifting de reload data
     const [dataUser, setDataUser] = useState([])
+    const [current, setCurrent] = useState(1);
+    const [pageSize, setPageSize] = useState(1);
+    const [total, setTotal] = useState(0);
     useEffect(() => {
         loadUser();
-    }, [])
+    }, [current, pageSize])
     const loadUser = async () => {
-        const res = await fetchAllUser();
-        setDataUser(res.data)
+        const res = await fetchAllUser(current, pageSize);
+        if (res.data) {
+            setDataUser(res.data.result);
+            setCurrent(res.data.meta.current);
+            setPageSize(res.data.meta.pageSize);
+            setTotal(res.data.meta.total);
+        }
     }
     //
     return (
@@ -22,6 +30,11 @@ const UserPage = () => {
             <UserTable
                 dataUser={dataUser}
                 loadUser={loadUser}
+                current={current}
+                pageSize={pageSize}
+                total={total}
+                setCurrent={setCurrent}
+                setPageSize={setPageSize}
             />
         </div>
     )
