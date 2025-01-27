@@ -1,11 +1,10 @@
-import { Link, NavLink } from 'react-router-dom'
-import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
+import { useState } from 'react';
 import { MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 const Header = () => {
-    const [current, setCurrent] = useState('mail');
+    const [current, setCurrent] = useState('home');
     const onClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
     };
     const items = [
@@ -23,6 +22,21 @@ const Header = () => {
             label: <Link to={'/books'}>Book</Link>,
             key: 'book',
             icon: <MailOutlined />,
+        },
+        {
+            label: 'Setting',
+            key: 'setting',
+            icon: <SettingOutlined />,
+            children: [
+                {
+                    label: <Link to={'/login'}>Login</Link>,
+                    key: 'login',
+                },
+                {
+                    label: 'Log Out',
+                    key: 'logout',
+                },
+            ],
         },
     ];
     return (
