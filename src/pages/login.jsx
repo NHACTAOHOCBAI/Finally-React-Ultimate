@@ -1,10 +1,26 @@
-import { Button, Col, Divider, Form, Input, Row } from "antd"
-import { Link } from "react-router-dom";
+import { Button, Col, Divider, Form, Input, message, notification, Row } from "antd"
+import { Link, useNavigate } from "react-router-dom";
+import { loginAPI } from "../services/api.service";
+import { useState } from "react";
 
 const LoginPage = () => {
     const [form] = Form.useForm();
-    const onFinish = (values) => {
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const onFinish = async (values) => {
+        setLoading(true);
+        const res = await loginAPI(values.email, values.password)
+        if (res.data) {
+            message.success("Đăng nhập thành công")
+            navigate("/");
+        }
+        else {
+            notification.error({
+                message: "failed"
+            });
+        }
         console.log(values)
+        setLoading(false)
     }
     return (
         <Form
@@ -49,6 +65,7 @@ const LoginPage = () => {
             <Row justify={"center"}>
                 <Col xs={24} md={8}>
                     <Button
+                        loading={loading}
                         type='primary'
                         onClick={() => form.submit()}
                     >Login</Button>
@@ -59,7 +76,7 @@ const LoginPage = () => {
                     <div>Bạn chưa có tài khoản?<Link to='/register'>Đăng ký tại đây</Link></div>
                 </Col>
             </Row>
-        </Form>
+        </Form >
     )
 }
 export default LoginPage
