@@ -9,6 +9,7 @@ const createUserAPI = (fullName, email, phone, password) => {
     }
     return axios.post(URL_Backend, data);
 }
+//hihi an tet
 const registerUserAPI = (fullName, email, phone, password) => {
     const URL_Backend = "api/v1/user/register";
     const data = {
