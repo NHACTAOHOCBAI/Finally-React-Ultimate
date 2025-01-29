@@ -20,6 +20,7 @@ const registerUserAPI = (fullName, email, phone, password) => {
     }
     return axios.post(URL_Backend, data);
 }
+//mong 1 tet
 const loginAPI = (email, password) => {
     const URL_Backend = "api/v1/auth/login";
     const data = {
