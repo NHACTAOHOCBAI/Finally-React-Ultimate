@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
+import { AuthContext } from '../context/auth.context';
 const Header = () => {
     const [current, setCurrent] = useState('home');
+    const { user } = useContext(AuthContext);
     const onClick = (e) => {
         setCurrent(e.key);
     };
+    console.log(user);
     const items = [
         {
             label: <Link to={'/'}>Home</Link>,

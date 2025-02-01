@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import {
@@ -12,6 +12,7 @@ import BookPage from './pages/book.jsx';
 import './styles/global.css'
 import TodoApp from './components/todo/TodoApp.jsx';
 import ErrorPage from './pages/error.jsx';
+import { AuthWrapper } from './components/context/auth.context.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
   },
 ]);
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <AuthWrapper>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </AuthWrapper>
 )
