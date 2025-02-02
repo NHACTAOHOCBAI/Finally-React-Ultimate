@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react';
-import { MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { BookOutlined, HomeOutlined, LoginOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { AuthContext } from '../context/auth.context';
 const Header = () => {
@@ -14,33 +14,36 @@ const Header = () => {
         {
             label: <Link to={'/'}>Home</Link>,
             key: 'home',
-            icon: <MailOutlined />,
+            icon: <HomeOutlined />,
         },
         {
             label: <Link to={'/users'}>User</Link>,
             key: 'user',
-            icon: <MailOutlined />,
+            icon: <UserOutlined />,
         },
         {
             label: <Link to={'/books'}>Book</Link>,
             key: 'book',
-            icon: <MailOutlined />,
+            icon: <BookOutlined />,
         },
-        {
-            label: 'Setting',
-            key: 'setting',
-            icon: <SettingOutlined />,
-            children: [
-                {
-                    label: <Link to={'/login'}>Login</Link>,
-                    key: 'login',
-                },
-                {
-                    label: 'Log Out',
-                    key: 'logout',
-                },
-            ],
-        },
+        ...(!user.id ? [{
+            label: <Link to={'/login'}>Login</Link>,
+            key: 'login',
+            icon: <LoginOutlined />
+        }] : [
+            {
+                label: `Welcome ${user.fullName}`,
+                key: 'setting',
+                icon: <SettingOutlined />,
+                children: [
+
+                    {
+                        label: 'Log Out',
+                        key: 'logout',
+                    },
+                ],
+            },
+        ]),
     ];
     return (
         <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
