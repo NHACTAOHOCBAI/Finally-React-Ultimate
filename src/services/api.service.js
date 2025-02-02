@@ -52,6 +52,10 @@ const getAccountAPI = () => {
     const URL_Backend = "/api/v1/auth/account";
     return axios.get(URL_Backend);
 }
+const logoutAPI = () => {
+    const URL_Backend = "/api/v1/auth/logout";
+    return axios.post(URL_Backend);
+}
 const handleUploadFile = (file, folder) => {
     const URL_Backend = "api/v1/file/upload";
     let config = {
@@ -83,5 +87,6 @@ export {
     updateUserAvatarAPI,
     registerUserAPI,
     loginAPI,
-    getAccountAPI
+    getAccountAPI,
+    logoutAPI
 }
