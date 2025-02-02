@@ -48,6 +48,10 @@ const fetchAllUser = (current, pageSize) => {
     const URL_Backend = `api/v1/user?current=${current}&pageSize=${pageSize}`;
     return axios.get(URL_Backend);
 }
+const getAccountAPI = () => {
+    const URL_Backend = "/api/v1/auth/account";
+    return axios.get(URL_Backend);
+}
 const handleUploadFile = (file, folder) => {
     const URL_Backend = "api/v1/file/upload";
     let config = {
@@ -78,5 +82,6 @@ export {
     handleUploadFile,
     updateUserAvatarAPI,
     registerUserAPI,
-    loginAPI
+    loginAPI,
+    getAccountAPI
 }

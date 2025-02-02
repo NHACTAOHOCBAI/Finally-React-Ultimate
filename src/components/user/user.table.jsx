@@ -13,7 +13,6 @@ const UserTable = (props) => {
     const { dataUser, loadUser, current, pageSize, total, setCurrent, setPageSize } = props;
     const handleClickDelete = async (_id) => {
         const res = await deleteUserAPI(_id)
-        console.log(res);
         if (res.data) {
             notification.success({
                 message: "Delete user",
@@ -22,7 +21,7 @@ const UserTable = (props) => {
             await loadUser();
         }
     }
-    const onChange = (pagination, filters, sorter, extra) => {
+    const onChange = (pagination) => {
         if (pagination && pagination.current) {
             if (+pagination.current !== +current) {
                 setCurrent(+pagination.current)

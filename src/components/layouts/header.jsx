@@ -9,7 +9,6 @@ const Header = () => {
     const onClick = (e) => {
         setCurrent(e.key);
     };
-    console.log(user);
     const items = [
         {
             label: <Link to={'/'}>Home</Link>,
