@@ -48,6 +48,10 @@ const fetchAllUser = (current, pageSize) => {
     const URL_Backend = `api/v1/user?current=${current}&pageSize=${pageSize}`;
     return axios.get(URL_Backend);
 }
+const fetchAllBook = (current, pageSize) => {
+    const URL_Backend = `api/v1/book?current=${current}&pageSize=${pageSize}`;
+    return axios.get(URL_Backend);
+}
 const getAccountAPI = () => {
     const URL_Backend = "/api/v1/auth/account";
     return axios.get(URL_Backend);
@@ -78,6 +82,16 @@ const updateUserAvatarAPI = (_id, avatar, fullName, phone) => {
     }
     return axios.put(URL_Backend, data);
 }
+const updateBookAvatarAPI = (_id, avatar, fullName, phone) => {
+    const URL_Backend = "api/v1/user";
+    const data = {
+        avatar: avatar,
+        fullName: fullName,
+        phone: phone,
+        _id: _id
+    }
+    return axios.put(URL_Backend, data);
+}
 export {
     deleteUserAPI,
     createUserAPI,
@@ -88,5 +102,6 @@ export {
     registerUserAPI,
     loginAPI,
     getAccountAPI,
-    logoutAPI
+    logoutAPI,
+    fetchAllBook, updateBookAvatarAPI
 }
