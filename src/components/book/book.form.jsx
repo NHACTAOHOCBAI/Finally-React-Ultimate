@@ -28,6 +28,13 @@ const BookForm = (props) => {
         }
     }
     const handleClickOK = async () => {
+        if (!selectedFile) {
+            notification.error({
+                message: "Error create book",
+                description: "Hay nhap anh"
+            })
+            return;
+        }
         const resUpload = await handleUploadFile(selectedFile, "avatar");
         if (resUpload.data) {
             const newAvatar = resUpload.data.fileUploaded;
@@ -98,6 +105,8 @@ const BookForm = (props) => {
                         <span>Giá</span>
                         <br />
                         <InputNumber
+                            style={{ width: "100%" }}
+                            addonAfter={'đ'}
                             onChange={(event) => { setPrice(event) }}
                             value={price}
                         />
@@ -106,18 +115,20 @@ const BookForm = (props) => {
                         <span>Số lượng</span>
                         <br />
                         <InputNumber
+                            style={{ width: "100%" }}
                             onChange={(event) => { setQuantity(event) }}
                             value={quantity}
                         />
                     </div>
                     <div>
                         <span>Danh mục</span>
+                        <br />
                         <Select
+
                             value={category}
                             onChange={(event) => { setCategory(event) }}
                             style={{
-                                width: 200,
-                                margin: 10
+                                width: "100%"
                             }}
                             options={[
                                 { value: 'Arts', label: 'Arts' },
@@ -138,6 +149,7 @@ const BookForm = (props) => {
                         <input type="file"
                             hidden id='btnUpload'
                             onChange={handleOnChangeFile}
+                            onClick={(event) => event.target.value = null}
                         // nhung tham so dau vao cua onchange se tu dong vao ham kia
                         />
                     </div>
