@@ -2,11 +2,12 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
+import BookForm from "./book.form";
 
 const BookTable = (props) => {
     const [dataView, setDataView] = useState(null);
     const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
-    const { dataUser, loadUser, current, pageSize, total, setCurrent, setPageSize } = props;
+    const { dataUser, loadBook, current, pageSize, total, setCurrent, setPageSize } = props;
     const onChange = (pagination) => {
         if (pagination && pagination.current) {
             if (+pagination.current !== +current) {
@@ -95,7 +96,6 @@ const BookTable = (props) => {
                 onChange={onChange}
             />
             <ViewBookDetail
-                loadUser={loadUser}
                 dataView={dataView}
                 setDataView={setDataView}
                 isModalDetailOpen={isModalDetailOpen}

@@ -9,6 +9,19 @@ const createUserAPI = (fullName, email, phone, password) => {
     }
     return axios.post(URL_Backend, data);
 }
+const createBookAPI = (thumbnail, mainText, author, price, quantity, category) => {
+    const URL_Backend = "api/v1/book";
+    const data = {
+        thumbnail: thumbnail,
+        mainText: mainText,
+        author: author,
+        price: price,
+        quantity: quantity,
+        category: category
+    }
+    console.log(data);
+    return axios.post(URL_Backend, data);
+}
 //hihi an tet
 const registerUserAPI = (fullName, email, phone, password) => {
     const URL_Backend = "api/v1/user/register";
@@ -82,16 +95,6 @@ const updateUserAvatarAPI = (_id, avatar, fullName, phone) => {
     }
     return axios.put(URL_Backend, data);
 }
-const updateBookAvatarAPI = (_id, avatar, fullName, phone) => {
-    const URL_Backend = "api/v1/user";
-    const data = {
-        avatar: avatar,
-        fullName: fullName,
-        phone: phone,
-        _id: _id
-    }
-    return axios.put(URL_Backend, data);
-}
 export {
     deleteUserAPI,
     createUserAPI,
@@ -103,5 +106,6 @@ export {
     loginAPI,
     getAccountAPI,
     logoutAPI,
-    fetchAllBook, updateBookAvatarAPI
+    fetchAllBook,
+    createBookAPI
 }

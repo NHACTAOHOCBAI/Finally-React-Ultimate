@@ -9,9 +9,9 @@ const BookPage = () => {
     const [pageSize, setPageSize] = useState(5);
     const [total, setTotal] = useState(0);
     useEffect(() => {
-        loadUser();
+        loadBook();
     }, [current, pageSize])
-    const loadUser = async () => {
+    const loadBook = async () => {
         const res = await fetchAllBook(current, pageSize);
         if (res.data) {
             setDataBook(res.data.result);
@@ -23,11 +23,11 @@ const BookPage = () => {
     return (
         <div style={{ padding: '20px' }}>
             <BookForm
-                loadUser={loadUser}
+                loadBook={loadBook}
             />
             <BookTable
                 dataUser={dataBook}
-                loadUser={loadUser}
+                loadUser={loadBook}
                 current={current}
                 pageSize={pageSize}
                 total={total}
