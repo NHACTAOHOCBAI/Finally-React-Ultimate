@@ -13,7 +13,9 @@ const BookPage = () => {
         loadBook();
     }, [current, pageSize])
     const loadBook = async () => {
+        console.log(0)
         const res = await fetchAllBook(current, pageSize);
+        console.log(1)
         if (res.data) {
             setDataBook(res.data.result);
             setCurrent(res.data.meta.current);
@@ -28,7 +30,7 @@ const BookPage = () => {
             />
             <BookTable
                 dataUser={dataBook}
-                loadUser={loadBook}
+                loadBook={loadBook}
                 current={current}
                 pageSize={pageSize}
                 total={total}

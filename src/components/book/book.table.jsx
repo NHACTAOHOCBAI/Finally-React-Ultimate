@@ -1,13 +1,26 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Table } from "antd";
+import { notification, Popconfirm, Table } from "antd";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
-import BookForm from "./book.form";
+import UpdateBookModal from "./update.book";
+import { deleteBookAPI } from "../../services/api.service";
 
 const BookTable = (props) => {
     const [dataView, setDataView] = useState(null);
     const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState(null);
+    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const { dataUser, loadBook, current, pageSize, total, setCurrent, setPageSize } = props;
+    const handleClickDelete = async (_id) => {
+        const res = await deleteBookAPI(_id)
+        if (res.data) {
+            notification.success({
+                message: "Delete book",
+                description: "Delete book successfully"
+            })
+            await loadBook();
+        }
+    }
     const onChange = (pagination) => {
         if (pagination && pagination.current) {
             if (+pagination.current !== +current) {
@@ -64,12 +77,26 @@ const BookTable = (props) => {
         {
             title: 'Action',
             key: 'action',
-            render: () => {
+            render: (_, record) => {
                 return (
                     <div style={{ display: 'flex', gap: "20px" }}>
-                        <EditOutlined />
-                        <DeleteOutlined
-                            style={{ color: "red" }} />
+                        <EditOutlined
+                            onClick={() => {
+                                setDataUpdate(record);
+                                setIsModalUpdateOpen(true)
+                            }}
+                            style={{ color: 'orange' }} />
+                        <Popconfirm
+                            title="Delete the task"
+                            description="Are you sure to delete this user?"
+                            onConfirm={() => { handleClickDelete(record._id) }}
+                            onCancel={() => { }}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <DeleteOutlined
+                                style={{ color: "red" }} />
+                        </Popconfirm>
                     </div>
                 )
             }
@@ -94,6 +121,13 @@ const BookTable = (props) => {
                     }
                 }
                 onChange={onChange}
+            />
+            <UpdateBookModal
+                loadBook={loadBook}
+                dataUpdate={dataUpdate}
+                setDataUpdate={setDataUpdate}
+                isModalUpdateOpen={isModalUpdateOpen}
+                setIsModalUpdateOpen={setIsModalUpdateOpen}
             />
             <ViewBookDetail
                 dataView={dataView}

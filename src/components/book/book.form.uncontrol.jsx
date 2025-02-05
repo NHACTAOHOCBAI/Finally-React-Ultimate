@@ -28,7 +28,6 @@ const UncontrolledBookForm = (props) => {
         form.submit();
     }
     const onFinish = async (values) => {
-        console.log(values);
         if (!selectedFile) {
             notification.error({
                 message: "Error create book",
