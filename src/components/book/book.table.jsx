@@ -4,6 +4,7 @@ import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
 import UpdateBookModal from "./update.book";
 import { deleteBookAPI } from "../../services/api.service";
+import UncontrolledUpdateBookModal from "./update.book.uncontrolled";
 
 const BookTable = (props) => {
     const [dataView, setDataView] = useState(null);
@@ -122,7 +123,7 @@ const BookTable = (props) => {
                 }
                 onChange={onChange}
             />
-            <UpdateBookModal
+            <UncontrolledUpdateBookModal
                 loadBook={loadBook}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
